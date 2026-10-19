@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .serializers import LoginSerializer, RegisterSerializer, UserSerializer , LogoutSerializer
+from .serializers import LoginSerializer, RegisterSerializer, UserSerializer
 
 
 class RegisterView(APIView):
@@ -20,13 +20,3 @@ class RegisterView(APIView):
 
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
-
-class LogoutView(APIView):
-    authentication_classes = []
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = LogoutSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.validated_data["refresh"].blacklist()
-        return Response(status=status.HTTP_204_NO_CONTENT)

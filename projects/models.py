@@ -34,4 +34,4 @@ class Membership(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.user_id} -> {self.project_id} ({self.role})"
+        return f"{self.user.phone_number} -> {self.project.name} ({self.role})"
